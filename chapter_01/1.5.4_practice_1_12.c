@@ -4,21 +4,18 @@
 #define OUT 0
 
 int main() {
-    int c, state, out_num;
+    int c, state;
     state = OUT;
-    out_num = 0;
     while ((c = getchar()) != EOF) {
         if (c == ' ' || c == '\t' || c == '\n') {
-            state = OUT;
-            ++out_num;
-            if (out_num == 1) {
+            if (state == IN) {
                 putchar('\n');
+                state = OUT;
             }
-        } else {
+        } else if (state == OUT) {
             state = IN;
-            out_num = 0;
-        }
-        if (state == IN) {
+            putchar(c);
+        } else {
             putchar(c);
         }
     }
