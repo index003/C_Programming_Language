@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-#define MAX_CHAR 128
+#define COUNT_CHAR 128
 
 int main() {
     int c;
-    int cc[MAX_CHAR];
-    for (int i = 0; i < MAX_CHAR;i++) {
+    int cc[COUNT_CHAR];
+    for (int i = 0; i < COUNT_CHAR;i++) {
         cc[i] = 0;
     }
 
@@ -13,7 +13,7 @@ int main() {
         ++cc[c];
     }
 
-    for (int j = 0; j < MAX_CHAR; j++) {
+    for (int j = 0; j < COUNT_CHAR; j++) {
         if (cc[j] > 0) {
             if (j == ' ') {
                 printf("space");
