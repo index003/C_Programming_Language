@@ -3,17 +3,14 @@
 #define FIXEDLINE 38
 
 int get_line(char s[], int lim);
-void copy(char to[], char from[]);
 
 int main() {
     int len;
     char line[MAXLINE];
-    char fixed_line[MAXLINE];
     
     while ((len = get_line(line, MAXLINE)) > 0) {
         if (len > FIXEDLINE) {
-             copy(fixed_line, line);
-             printf("%s\n", fixed_line);
+             printf("%s\n", line);
         }
     }
 }
@@ -37,11 +34,3 @@ int get_line(char s[], int lim) {
     return i;
 }
 
-
-void copy(char to[], char from[]) {
-    int i;
-    i = 0;
-    while ((to[i] = from[i]) != '\0') {
-        ++i;
-    }
-}
