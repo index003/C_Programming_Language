@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define MAXLINE 10
+#define MAXLINE 5 
 
 int get_line(char line[], int limit);
 void copy(char to[], char from[]);
@@ -14,10 +14,10 @@ int main() {
     char nextline[MAXLINE];
     max = 0;
     while ((len = get_line(line, MAXLINE)) > 0) {
-        if (len == MAXLINE - 1) {
+        if ((len == MAXLINE - 1) && (line[MAXLINE - 2] != '\n')) {
            line[MAXLINE - 1] = '\n';
            nextlen = len;
-           while (nextlen == MAXLINE - 1) {
+           while ((nextlen == MAXLINE - 1) && (nextline[MAXLINE - 2] != '\n')) {
                 nextlen = get_line(nextline, MAXLINE);
                 len += nextlen;
            }

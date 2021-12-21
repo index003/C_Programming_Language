@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define MAXLINE 1000
-#define FIXEDLINE 38
+#define FIXEDLINE 18
 
 int get_line(char s[], int lim);
 
