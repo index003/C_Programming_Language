@@ -5,7 +5,7 @@
 int main() {
     int c;
     int len;
-    char line[10];
+    char line[FIXEDLINE];
     len = 0;
 
     while ((c = getchar()) != EOF ) {
