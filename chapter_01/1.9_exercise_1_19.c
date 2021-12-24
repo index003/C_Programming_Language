@@ -1,24 +1,17 @@
 #include <stdio.h>
-#define MAXLINE 10
+#define MAXLINE 100
 
 int get_line(char line[], int lim);
-void copy(char to[], char from[]);
+
 /* print the longest input line */
 int main() {
-    int max;   
     int len;
     char line[MAXLINE];
-    char longest[MAXLINE];
-    max = 0;
     while ((len = get_line(line, MAXLINE)) > 0) {
-        printf("%d, %s", len, line);
-        if (len > max) {
-            max = len;
-            copy(longest, line);
+        for (int i = len -2; i >= 0; i--) {
+            putchar(line[i]);
         }
-    }
-    if (max > 0) {
-        printf("%d, %s", max, longest);
+        putchar('\n');
     }
 }
 
@@ -42,14 +35,4 @@ int get_line(char s[], int lim) {
     
 }
 
-void copy(char to[], char from[]) {
-    int i;
-    i = 0;
-    while((to[i] = from[i]) != '\0') {
-        ++i;       
-    }
-}
 
-void reverse(char s[]) {
-
-}
