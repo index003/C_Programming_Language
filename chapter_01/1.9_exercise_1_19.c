@@ -2,16 +2,14 @@
 #define MAXLINE 100
 
 int get_line(char line[], int lim);
-
+void reverse(char s[]);
 /* print the longest input line */
 int main() {
-    int len;
     char line[MAXLINE];
-    while ((len = get_line(line, MAXLINE)) > 0) {
-        for (int i = len -2; i >= 0; i--) {
-            putchar(line[i]);
-        }
-        putchar('\n');
+    while (get_line(line, MAXLINE) > 0) {
+       reverse(line);
+       printf("%s", line);
+       printf("\n");
     }
 }
 
@@ -35,4 +33,24 @@ int get_line(char s[], int lim) {
     
 }
 
+void reverse(char s[]) {
+    int i, j;
+    char temp;
+    i = 0;
+    j = 0;
+    while (s[i] != '\0') {
+        ++i;
+    }
+    --i;
+    if (s[i] != '\n') {
+        --i;
+    }
+    while (j < i) {
+        temp = s[j];
+        s[j] = s[i];
+        s[i] = temp;
+        --i;
+        ++j;
+    }
+}
 
