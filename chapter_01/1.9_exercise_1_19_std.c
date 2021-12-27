@@ -34,18 +34,23 @@ int get_line(char s[], int lim) {
 }
 
 void reverse(char s[]) {
-    int len;
-    len = 0;
-    while (s[len] != '\n' && s[len] != '\0') {
-        ++len;
+    int i, j;
+    char temp;
+    i = 0;
+    j = 0;
+    while (s[i] != '\0') {
+        ++i;
     }
-    if (len > 0) {
-       char temp;
-       for (int i = 0; i < len -1 -i; ++i) {
-            temp = s[i];
-            s[i] = s[len -1 -i];
-            s[len - 1 - i] = temp;
-       }
+    --i;
+    if (s[i] != '\n') {
+        --i;
+    }
+    while (j < i) {
+        temp = s[j];
+        s[j] = s[i];
+        s[i] = temp;
+        --i;
+        ++j;
     }
 }
 

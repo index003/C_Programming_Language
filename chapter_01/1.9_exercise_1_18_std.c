@@ -20,24 +20,22 @@ int main() {
 
 
 int remove_bt(char s[]) {
-    int len, i, j;
+    int i;
     i = 0;
-    len = 0;
-    j = 0;
-    while (s[i] != '\n' && s[i] != '\0') {
-        i++;
+    while (s[i] != '\n') {
+        ++i;
     }
-    if (i > 0) {
-        for (j = i - 1; j >= 0; j--){
-            if((s[j] != ' ') && (s[j] != '\t') && len == 0) {
-                len = j + 1;
-                s[len] = '\n';
-                len ++;
-                s[len] = '\0';
-            }
-        }
+    --i;
+    while(i >= 0 && (s[i] == ' ' || s[i] == '\t')) {
+        --i;
     }
-    return len;
+    if (i >= 0) {
+        ++i;
+        s[i] = '\n';
+        ++i;
+        s[i] = '\0';
+    }
+    return i;
 }
 
 
