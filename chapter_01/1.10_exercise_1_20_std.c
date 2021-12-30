@@ -1,6 +1,7 @@
 #include <stdio.h>
 #define TABINC 10 
 
+/* replace tabs with proper number of blanks */
 int main() {
     int c, nb, pos;
     nb = 0;
