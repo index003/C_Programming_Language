@@ -1,8 +1,0 @@
-bc dd
-bc dd //
-abcd /* abcd */ ddd
-abcd /* abcd */ ddd //kkk
-abcd "/* abcd */" ddd //kkk
-a/b/c/d/ * dd * "// jj "
-
-
