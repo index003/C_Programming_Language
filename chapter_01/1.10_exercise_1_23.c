@@ -8,9 +8,9 @@
 
 
 int main() {
-    int c;
-    int state = 0;
+    int c; //当前字符
     char lc ='\0'; //记录上一个字符内容
+    int state = 0;
 
     while ((c = getchar()) != EOF) {
         if (state == NORMAL) {

@@ -11,20 +11,6 @@ int main() {
     }
 }
 
-/* lllll
-
-/* 
-
-//kkkkk
-
-/* ikkk  */
-/* ik
-kdfjk
-fjafjkla
-
-
-kk  */
-
 void recomment(int c) {
     int d;
     if (c == '/') {
