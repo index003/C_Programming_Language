@@ -4,7 +4,8 @@
 #define ONE_SLASH 1     // 第一个斜杠
 #define TWO_SLASH 2     // 第二个斜杠
 #define SLASH_STAR 3    // 斜杠和星号
-#define STRING_FLAG 4
+#define STRING_FLAG 4   // 字符串
+#define CHAR_FLAG 5     // 字符
 
 
 int main() {
@@ -18,6 +19,9 @@ int main() {
                  state = ONE_SLASH;
              } else if (c == '"'){
                  state = STRING_FLAG;
+                 putchar(c);
+             } else if (c == '\''){
+                 state = CHAR_FLAG;
                  putchar(c);
              } else {
                  putchar(c);
@@ -41,6 +45,11 @@ int main() {
              if (c == '/' && lc == '*') {
                  state = NORMAL;
              }   
+        } else if (state == CHAR_FLAG) {
+             if (c == '\'') {
+                state = NORMAL;
+             }
+             putchar(c);
         } else if (state == STRING_FLAG) {
             if (c == '"') {
                 state = NORMAL;

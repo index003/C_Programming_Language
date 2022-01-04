@@ -1,0 +1,11 @@
+/*
+ * multi lines comment 1
+ * multi lines comment 2
+ */
+int c1 = '\''; // single char
+int c2 = '"'; // single char
+char s[] = "//fff"; // char array s1
+char s2[] = "/*ff*/f"; // char array s2
+int /* special* comment */ comment_state = OUT; // indicates whether inside a comment
+int string_state = OUT; // indicates whether inside a *string /
+int comment_state = OUT; /* indicates whether inside a comment */
