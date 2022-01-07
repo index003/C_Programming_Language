@@ -6,11 +6,10 @@ int main() {
 
 	int c, n_space;
 	n_space = 0;
-	while((c = getchar()) != EOF) {
+	while ((c = getchar()) != EOF) {
 		if (c == ' ') {
 			n_space++;
-		}
-		else {
+		} else {
 			n_space = 0;
 		}
 
