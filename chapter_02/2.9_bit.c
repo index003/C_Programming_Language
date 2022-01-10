@@ -9,28 +9,21 @@ int main() {
     /*
     
     &  按位与(AND)
-
-    0 0 => 0, 1 0 => 0, 0 1 => 0, 1 1 => 1
-    
     |  按位或(OR)
-   
-    0 0 => 0, 1 0 => 1, 0 1 => 1, 1 1 => 1
-  
     ^  按位异或(XOR)
- 
-     0 0 => 1, 1 0 => 0, 0 1 => 0, 1 1 => 0
-
     << 左移
     >> 右移
     ~  按位取反(一元运算符)
     
     */
+    printf("i = %d\n", i);
+    printf("x = %d\n", x);
     printf("i & x = %d\n", i & x);
     printf("i | x = %d\n", i | x);
     printf("i ^ x = %d\n", i ^ x);
-    printf("i << x = %d\n", i << x);
-    printf("i >> x = %d\n", i >> x);
-    printf("~x = %u\n", ~x);
+    printf("i << 1 = %d\n", i << 1);
+    printf("i >> 1 = %d\n", i >> 1);
+    printf("i & ~x = %u\n", i & ~x);
 
 
     printf("%c\n", p_upper('a'));
