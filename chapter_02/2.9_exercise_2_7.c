@@ -1,23 +1,23 @@
 #include <stdio.h>
 
-unsigned invert(unsigned x, int p, int n);
+int invert(int x, int p, int n);
 
 int main() {
-    unsigned x = 0b01111101; // 117
+    int x = 0b01110101; // 117
     printf("%u\n", x); 
     printf("%u\n", invert(x, 4, 3)); 
 }
 
 
-unsigned invert(unsigned x, int p, int n) {
-    unsigned i, j, k;
-    // unsigned x = 0b01110101; // 117
+int invert(int x, int p, int n) {
+    int i, j, k, l;
+    // 将要替换的位置置为1，其他的位置都是0
     i = ((~(~0 << n)) << p + 1 - n);
-    // 11111111 -- 11111000 -- 00000111 -- 00011100
+    // 将x对应的位置保留，其他的位置置为0
     j = x & i;
-    // 00010100 20
+    // 将x对应的位置置为1，其他内容保持不变
     k = x | i;
-    // 01111101 125
-    return  ~(~k | j);
-    // 01101001
+    // 替换
+    l = ~(~k | j);
+    return  l;
 }
