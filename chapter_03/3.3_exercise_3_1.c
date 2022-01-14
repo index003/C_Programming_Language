@@ -27,6 +27,7 @@ int binsearch(int x, int v[], int n) {
         }
         mid = (low + high) / 2;
     }
+    
     if (x == v[mid]) {
         return mid;
     } else {

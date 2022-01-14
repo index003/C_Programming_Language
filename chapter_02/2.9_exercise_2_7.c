@@ -10,6 +10,7 @@ int main() {
 
 
 int invert(int x, int p, int n) {
+    /*
     int i, j, k, l;
     // 将要替换的位置置为1，其他的位置都是0
     i = ((~(~0 << n)) << p + 1 - n);
@@ -20,4 +21,6 @@ int invert(int x, int p, int n) {
     // 替换
     l = ~(~k | j);
     return  l;
+    */
+    return ((~(~0 << n)) << p + 1 - n) ^ x;
 }
