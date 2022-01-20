@@ -10,33 +10,33 @@ int main() {
     char s[MAX_LENGTH];
     char t[MAX_LENGTH];
     while ((c = getchar()) != EOF) {
-        s[i++] = c;
+        t[i++] = c;
     }
     escape(s, t);
-    printf("%s\n", t);
+    printf("%s\n", s);
 }
 
 void escape(char s[], char t[]) {
     int i, j;
-    for (i = j = 0; s[i] != '\0'; i++) {
-        switch (s[i]) {
+    for (i = j = 0; t[i] != '\0'; i++) {
+        switch (t[i]) {
             case '\\':
-                switch (s[i + 1]) {
+                switch (t[i + 1]) {
                     case 'n':
-                        t[j++] = '\n';
+                        s[j++] = '\n';
                         i++;
                         break;
                     case 't':
-                        t[j++] = '\t';
+                        s[j++] = '\t';
                         i++;
                         break;
                     default:
-                        t[j++] = s[i];
+                        s[j++] = t[i];
                         break;
                 }
                 break;
             default:
-                t[j++] = s[i];
+                s[j++] = t[i];
                 break;
         }
 /*
@@ -56,5 +56,5 @@ void escape(char s[], char t[]) {
 */
 
     }
-    t[j] = '\0';
+    s[j] = '\0';
 }

@@ -10,32 +10,33 @@ int main() {
     char s[MAX_LENGTH];
     char t[MAX_LENGTH];
     while ((c = getchar()) != EOF) {
-        s[i++] = c;
+        t[i++] = c;
     }
     escape(s, t);
     printf("%d\n", i);
-    for (int j = 0; t[j] != '\0'; j++) {
-        putchar(t[j]);
+    for (int j = 0; s[j] != '\0'; j++) {
+        putchar(s[j]);
     }
     printf("\n");
 }
 
 void escape(char s[], char t[]) {
-    int i, j;
-    for (i = j = 0; s[i] != '\0'; i++) {
-        switch (s[i]) {
+    int i = 0, j = 0;
+    while (t[i]) {
+        switch (t[i]) {
             case '\n':
-                t[j++] = '\\';
-                t[j++] = 'n';
+                s[j++] = '\\';
+                s[j++] = 'n';
                 break;
             case '\t':
-                t[j++] = '\\';
-                t[j++] = 't';
+                s[j++] = '\\';
+                s[j++] = 't';
                 break;
             default:
-                t[j++] = s[i];
+                s[j++] = t[i];
                 break;
         }
-        t[j] = '\0';
+    i++;
     }
+    s[j] = '\0';
 }
