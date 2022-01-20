@@ -5,6 +5,6 @@ int main() {
 
 }
 
-void itob (int n, char s[], int b) {
+void itoa (int n, char s[]) {
        
 }

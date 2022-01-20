@@ -21,15 +21,15 @@ void expand(char s1[], char s2[]) {
         if (s1[i] == '-') {
             if (i == 0) {
                 s2[j++] = s1[i++];
-            } else if ((islower(s1[i - 1]) && islower(s1[i + 1])) \
-                        || (isupper(s1[i - 1]) && isupper(s1[i + 1])) \
-                        || (isdigit(s1[i - 1]) && isdigit(s1[i + 1]))) {
-                int k = s1[i + 1] - s1[i - 1];
-                if(k >= 0) {
+            } else if ((islower(s1[i - 1]) && islower(s1[i + 1])) \         /* 如果两边都是小写 */
+                        || (isupper(s1[i - 1]) && isupper(s1[i + 1])) \     /* 如果两边都是大写 */
+                        || (isdigit(s1[i - 1]) && isdigit(s1[i + 1]))) {    /* 如果两边都是数字*/   
+                int k = s1[i + 1] - s1[i - 1];  /* 计算两个字符之间的长度 */
+                if(k >= 0) {    /* 前面字母小，后面字母大 */
                     for(int l = 1; l < k; l++) {
                         s2[j++] = s1[i -1] + l;
                     }
-                    i++;
+                    i++;    /* 空白字符不要记录了 */
                 } else {
                         s2[j++] = s1[i++];
                 }
