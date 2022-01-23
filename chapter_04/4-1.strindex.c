@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #define MAXLINE 1000
 
 int p_getline(char line[], int max);
@@ -14,8 +15,11 @@ int main() {
         
         int k = strindex(line, pattern);
         printf("从第 %d 个位置开始匹配\n", k);
-        
-        if (strindex(line, pattern) >= 0) {
+
+        int l = strlen(line);
+        printf("l = %d\n", l);
+
+        if (strindex(line, pattern) < strlen(line) - 2) {
             printf("%s",line);
             found++;
         }
@@ -24,12 +28,11 @@ int main() {
 }
 
 
-/* p_getline: get line into s, return length */
 int p_getline(char s[], int lim) {
-    int c, i;
+    int i, c;
     i = 0;
-    while (--lim > 0 && (c = getchar()) != EOF && c != '\n') {
-        s[i++] = c;   
+    while (--lim > 0 && (c = getchar()) != EOF && c != '\0') {
+        s[i++] = c;
     }
     if (c == '\n') {
         s[i++] = c;
@@ -38,16 +41,14 @@ int p_getline(char s[], int lim) {
     return i;
 }
 
-
-/* strindex: return index of t in s, -1 if none */
 int strindex(char s[], char t[]) {
     int i, j, k;
-    for (i = 0; s[i] != '\0'; i++ ) {
-        for (j = i, k = 0; t[k] !='\0' && s[j] == t[k]; j++, k++) {
+    for (i = strlen(s)- 2; i >= 0; i--) {
+        for (j = i, k = strlen(t) -2; s[j] == t[k] && k >= 0; j--,k--) {
             ;
         }
-        if (k > 0 && t[k] == '\0') {
-            return i;
+        if (k < strlen(s) - 2) {
+            return i - strlen(t) + 1;
         }
     }
     return -1;
