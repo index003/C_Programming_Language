@@ -13,8 +13,7 @@ int main() {
 
 /* itoa: convert n to characters in s */
 void itoa(int n, char s[]) {
-    int i, sign;
-
+	int i, sign;
     if ((sign = n)< 0) {
         n = -n;
     }
