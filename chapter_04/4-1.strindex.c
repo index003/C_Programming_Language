@@ -40,12 +40,12 @@ int p_getline(char s[], int lim) {
 
 int strindex(char s[], char t[]) {
     int i, j, k;
-    for (i = strlen(s)- 1; i >= 0; i--) {
+    for (i = strlen(s) - 1; i >= 0; i--) {
         for (j = i, k = strlen(t) -1; s[j] == t[k] && k >= 0; j--,k--) {
             ;
         }
         if (k + 1 == 0) {
-            return i - strlen(t);
+            return i - strlen(t) + 1;
         }
     }
     return -1;
