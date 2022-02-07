@@ -6,14 +6,14 @@ void itoa (int n, char s[], int w);
 
 int main() {
     char s1[128];
-    char s2[128];;
-    char s3[128];;
+    char s2[128];
+    char s3[128];
     char s[] = "abc";
     reverse(s);
     printf("%s\n", s);
     itoa(-2147483648, s1, 10);
     itoa(-2148, s2, 10);
-    itoa(148, s3, 10);
+    itoa(148000, s3, 10);
     printf("%s\n", s1);
     printf("%s\n", s2);
     printf("%s\n", s3);

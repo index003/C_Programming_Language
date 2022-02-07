@@ -6,7 +6,7 @@ void itob (int n, char s[], int b);
 
 int main() {
     char s[128];
-    itob(15, s, 2);
+    itob(15, s, 16);
     printf("%s\n", s);
 
 }
