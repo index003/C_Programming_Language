@@ -16,10 +16,7 @@ int main() {
         int k = strindex(line, pattern);
         printf("从第 %d 个位置开始匹配\n", k);
 
-        int l = strlen(line);
-        printf("l = %d\n", l);
-
-        if (strindex(line, pattern) < strlen(line) - 2) {
+        if (strindex(line, pattern) > 0) {
             printf("%s",line);
             found++;
         }
@@ -31,7 +28,7 @@ int main() {
 int p_getline(char s[], int lim) {
     int i, c;
     i = 0;
-    while (--lim > 0 && (c = getchar()) != EOF && c != '\0') {
+    while (--lim > 0 && (c = getchar()) != EOF && c != '\n') {
         s[i++] = c;
     }
     if (c == '\n') {
@@ -43,12 +40,12 @@ int p_getline(char s[], int lim) {
 
 int strindex(char s[], char t[]) {
     int i, j, k;
-    for (i = strlen(s)- 2; i >= 0; i--) {
-        for (j = i, k = strlen(t) -2; s[j] == t[k] && k >= 0; j--,k--) {
+    for (i = strlen(s)- 1; i >= 0; i--) {
+        for (j = i, k = strlen(t) -1; s[j] == t[k] && k >= 0; j--,k--) {
             ;
         }
-        if (k < strlen(s) - 2) {
-            return i - strlen(t) + 1;
+        if (k + 1 == 0) {
+            return i - strlen(t);
         }
     }
     return -1;
