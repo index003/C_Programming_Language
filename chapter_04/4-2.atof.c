@@ -39,13 +39,15 @@ double atof(char s[]) {
     }
     if (s[i] == 'e' || s[i] == 'E') {
         i++;   
-    }
-    if (s[i] == '-') { 
-        power *= p_pow(10.0,(s[i + 1] - '0'));
-    } else if (s[i] == '+'){
-        power *= p_pow(0.1, (s[i + 1] - '0'));
-    } else {
-        power *= p_pow(0.1, (s[i] - '0'));
+        if (s[i] == '-') { 
+            i++;
+            power *= p_pow(10.0,(s[i] - '0'));
+        } else if (s[i] == '+'){
+            i++;
+            power *= p_pow(0.1, (s[i] - '0'));
+        } else {
+            power *= p_pow(0.1, (s[i] - '0'));
+        }
     }
     return sign * val / power;
 }
