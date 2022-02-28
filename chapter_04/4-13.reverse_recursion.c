@@ -14,7 +14,7 @@ int main() {
 void reverse(char s[]) {
     int len = strlen(s);
     static int i = 0;
-    int j = len - i - 1;
+    int j = len - 1 - i;
 
     int temp = s[i];
     s[i] = s[j];

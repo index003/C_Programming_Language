@@ -3,7 +3,7 @@
 
 void itoa(int, char []);
 int main() {
-    int n = -56789;
+    int n = -23456789;
     char s[10];
     itoa(n, s);
     printf("%s\n", s);
@@ -15,7 +15,7 @@ void itoa(int n, char s[]) {
     if ((n / 10) < 0) {
         s[0] = '-';
         n = -n;
-        i = 1;
+        i++;
     }
     if (n / 10) {
         itoa(n / 10, s);
