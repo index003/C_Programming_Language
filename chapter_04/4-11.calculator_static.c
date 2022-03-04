@@ -79,16 +79,15 @@ void ungetch(int);
 int getop(char s[]) {
     int i, c;
     static int additional_c = 0;
-    if (additional_c == 0)
-        c = getch();
-    else {
+    if (additional_c) {
         c = additional_c;
         additional_c = 0;
+    } else {
+        c = getch();
     }
         
-    c = additional_c;
-    while ((s[0] = c = getch()) == ' ' || c == '\t') {
-        ;
+    while ((s[0] = c) == ' ' || c == '\t') {
+        c = getch();
     }
     s[1] = '\0';
     if (!isdigit(c) && c != '.') {
