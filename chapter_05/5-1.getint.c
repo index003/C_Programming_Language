@@ -7,7 +7,9 @@ int main() {
     for (n = 0; n < SIZE && (type = getint(&array[n])) != EOF; n++) {
         if (type == 0)
             printf("it is not a number!\n");
-        else
+        else if (type == 1)
+            printf("%c\n", array[n]);
+        else 
             printf("%d\n", array[n]);
     }
 }
@@ -27,8 +29,13 @@ int getint(int *pn) {
         return 0;
     }
     sign = (c == '-') ? -1 : 1;
-    if (c == '+' || c == '-')
+    if (c == '+' || c == '-') {
         c = getch();
+        if (!isdigit(c)) { 
+            *pn = (sign == 1 ? '+' : '-');
+            return 1;
+        } 
+    }
     for (*pn = 0; isdigit(c); c = getch())
         *pn = 10 * *pn + (c - '0');
     *pn *= sign;

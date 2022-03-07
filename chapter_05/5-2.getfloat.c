@@ -3,12 +3,13 @@
 #define SIZE 30
 
 int main() {
-    int type, n, array[SIZE], getint(int *);
-    for (n = 0; n < SIZE && (type = getint(&array[n])) != EOF; n++) {
+    int n, type, getfloat(float *);
+    float array[SIZE];
+    for (n = 0; n < SIZE && (type = getfloat(&array[n])) != EOF; n++) {
         if (type == 0)
             printf("it is not a number!\n");
         else
-            printf("%d\n", array[n]);
+            printf("%f\n", array[n]);
     }
 }
 
@@ -17,21 +18,31 @@ int main() {
 int getch(void);
 void ungetch(int);
 
-/* getint: get next integer from input into *pn */
-int getint(int *pn) {
+/* getint: get next floating-point number from input */
+int getfloat(float *pf) {
     int c, sign;
     while (isspace(c = getch()))        /* skip white space */
         ;
-    if (!isdigit(c) && c != EOF && c != '+' && c != '-') {
+    if (!isdigit(c) && c != EOF && c != '+' && c != '-' && c != '.') {
         //ungetch(c);         /* it is not a number */
         return 0;
     }
     sign = (c == '-') ? -1 : 1;
     if (c == '+' || c == '-')
         c = getch();
-    for (*pn = 0; isdigit(c); c = getch())
-        *pn = 10 * *pn + (c - '0');
-    *pn *= sign;
+    for (*pf = 0.0; isdigit(c); c = getch())
+        *pf = 10.0 * *pf + (c - '0');
+
+    if (c == '.') { 
+        float power;
+        c = getch();
+        for (power = 1.0;isdigit(c); c = getch()) {
+            *pf = 10.0 * *pf  + (c - '0');
+            power *= 10.0;
+        }
+        *pf /= power;
+    }
+    *pf *= sign;
     if (c != EOF)
         ungetch(c);
     return c;
