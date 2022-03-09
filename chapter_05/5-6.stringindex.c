@@ -1,53 +1,27 @@
 #include <stdio.h>
-#define MAXLINE 1000
+#include <string.h>
 
-int p_getline(char line[], int max);
-int strindex(char source[], char searchfor[]);
+int strindex(char *source, char *searchfor);
 
-char pattern[] = "ould";
 
 /* find all lines matching pattern */
 int main() {
-    char line[MAXLINE];
-    int found = 0;
-    while (p_getline(line, MAXLINE) > 0) {
-        
-        int k = strindex(line, pattern);
-        printf("从第 %d 个位置开始匹配\n", k);
-        
-        if (strindex(line, pattern) >= 0) {
-            printf("%s",line);
-            found++;
-        }
-    }
-    return found;
-}
-
-
-/* p_getline: get line into s, return length */
-int p_getline(char s[], int lim) {
-    int c, i;
-    i = 0;
-    while (--lim > 0 && (c = getchar()) != EOF && c != '\n') {
-        s[i++] = c;   
-    }
-    if (c == '\n') {
-        s[i++] = c;
-    }
-    s[i] = '\0';
-    return i;
+    char *s = "abcdesinx";
+    char *t = "sin";
+    printf("strindex(\"%s\", \"%s\") => %d\n", s, t, strindex(s, t));
 }
 
 
 /* strindex: return index of t in s, -1 if none */
-int strindex(char s[], char t[]) {
-    int i, j, k;
-    for (i = 0; s[i] != '\0'; i++ ) {
-        for (j = i, k = 0; t[k] !='\0' && s[j] == t[k]; j++, k++) {
+int strindex(char *s, char *t) {
+    char *p = s;
+    int tlen = strlen(t);
+    for (; *s != '\0'; s++ ) {
+        for (; *t !='\0' && *s == *t; t++) {
             ;
         }
-        if (k > 0 && t[k] == '\0') {
-            return i;
+        if (*t == '\0') {
+            return s - p - (tlen - 1);
         }
     }
     return -1;
