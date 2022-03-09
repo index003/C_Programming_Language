@@ -9,6 +9,7 @@ int main() {
     printf("reverse(s) = %s\n", s);
 }
 
+/* reverse: reverse string s in place */
 void reverse(char *s) {
     char *p;
     for (p = s + strlen(s) - 1; s < p; s++, p--) {

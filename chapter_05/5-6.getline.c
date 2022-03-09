@@ -29,17 +29,3 @@ int get_line(char *s, int lim) {
     return i;
 }
 
-void atoi() {
-}
-
-void itoa(){
-}
-
-void reverse() {
-}
-
-void strindex() {
-}
-
-void getop() {
-}
