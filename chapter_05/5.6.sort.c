@@ -3,18 +3,16 @@
 
 #define MAXLINES 5000   /* max #lines to be sorted */
 
-char *lineptr[MAXLINES]; /* pointers to text lines */
 
 int readlines(char *lineptr[], int nlines);
 void writelines(char *lineptr[], int nlines);
-
 void qsort(char *lineptr[], int left, int right);
 
 /* sort input lines */
 int main() {
+    char *lineptr[MAXLINES]; /* pointers to text lines */
     int nlines;     /* number of input lines read */
-
-    if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
+    if ((nlines = readlines(lineptr, MAXLINES)) > 0) {
         qsort(lineptr, 0, nlines - 1);
         writelines(lineptr, nlines);
         return 0;
@@ -31,10 +29,8 @@ char *alloc(int);
 /* readlines: read input lines */
 int readlines(char *lineptr[], int maxlines) {
     int len, nlines;
-    char *p, line[MAXLINES];
-
-    nlines = 0;
-    while ((len = get_line(line, MAXLEN) > 0)) {
+    char *p, line[MAXLEN];
+    while ((len = get_line(line, MAXLEN)) > 0) {
         if (nlines >= maxlines || (p = alloc(len)) == NULL) {
             return -1;
         } else {
@@ -46,47 +42,26 @@ int readlines(char *lineptr[], int maxlines) {
     return nlines;
 }
 
-/* get_line: read a line into s, return length */
-int get_line(char *s, int lim) {
-    int c, i;   
-    for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; i++) {
-        *s++ = c;
-    }
-    if (c == '\n') {
-        *s++ = c;
-    }
-    *s = '\0';
-    return i;
-}
-
-#define ALLOCSIZE 10000     /* size of available space */
-
-static char allocbuf[ALLOCSIZE];    /* storage for alloc */
-static char *allocp = allocbuf;     /* next free position */
-
-
-char *alloc(int n) {        /* return pointer to n characters */
-    if (allocbuf + ALLOCSIZE - allocp >= n) {   /* it fits */
-        allocp += n;
-        return allocp - n;      /* old p */
-    } else {
-        return 0;
-    }
-}
-
-
-void afree (char *p) {      /* free storage pointed to by p */
-    if (p >= allocbuf && p < allocbuf + ALLOCSIZE) 
-        allocp = p;
-}
-
-
 /* writelines: write output lines */
 void writelines(char *lineptr[], int nlines) {
-    int i;
-    for (i = 0; i< nlines; i++) {
-        printf("%s\n", lineptr[i]);
+    while (nlines-- > 0) {
+        printf("%s\n", *lineptr++);
     }
+}
+
+/* get_line: read a line into s, return length */
+int get_line(char *line, int limit) {
+    int c;
+    char *bl = line;
+    while (limit-- > 0 && (c = getchar()) != EOF) {
+        *line++ = c;
+        if (c == '\n') {
+            break;
+        }
+    }
+    *line = '\0';
+    printf("%s", line);
+    return line - bl;
 }
 
 /* qsort: sort v[left] ... v[right] into increasing order */
@@ -100,21 +75,36 @@ void qsort(char *v[], int left, int right) {
 
     swap(v, left, (left + right) / 2);
     last = left;
-    for (i = left + 1; i<= right; i++) {
+    for (i = left + 1; i <= right; i++) {
         if (strcmp(v[i], v[left]) < 0) {
             swap(v, ++last, i);
         }
     }
     swap(v, left, last);
-    qsort(v, left, last -1);
+    qsort(v, left, last - 1);
     qsort(v, last + 1, right);
 }
 
-/* swap: interchage v[i] and v[j] */
+/* swap: interchange v[i] and v[j] */
 void swap(char *v[], int i, int j) {
     char *temp;
     temp = v[i];
     v[i] = v[j];
     v[j] = temp;
 }
+
+#define ALLOCSIZE 10000     /* size of available space */
+
+static char allocbuf[ALLOCSIZE]; // storage for alloc
+static char *allocp = allocbuf; // next free position
+
+char *alloc(int n) {
+    if (allocbuf + ALLOCSIZE - allocp >= n) { // it fits
+        allocp += n;
+        return allocp - n; // old p
+    } else { // not enough room
+        return 0;
+    }
+}
+
 
