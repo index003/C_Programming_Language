@@ -47,6 +47,7 @@ int main(int argc, char *argv[]) {
                 break;
             default:
                 printf("error: unknown command %s\n", s);
+                argc = 1;
                 break;
         }
     }
