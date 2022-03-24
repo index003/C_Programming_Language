@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
             case '+':
                 push(pop() + pop());
                 break;
-            case 'x':
+            case '*':
                 push(pop() * pop());
                 break;
             case '-':
