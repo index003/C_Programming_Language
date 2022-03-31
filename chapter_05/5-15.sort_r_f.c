@@ -109,9 +109,7 @@ int get_line(char *line, int limit) {
 void p_qsort(void *v[], int left, int right, int (*comp)(void *, void *)) {
 
     int i, last;
-
     void swap(void *v[], int, int);
-
     if (left >= right) {    /* do nothing if array contains */
         return;
     }
@@ -125,7 +123,6 @@ void p_qsort(void *v[], int left, int right, int (*comp)(void *, void *)) {
     swap(v, left, last);
     p_qsort(v, left, last - 1, comp);
     p_qsort(v, last + 1, right, comp);
-
 }
 
 /* numcmp: compare s1 and s2 numerically */
