@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define MAXLINES 5000       /* max # lines to be sorted */
 char *lineptr[MAXLINES];    /* pointers to text lines */
@@ -10,13 +11,14 @@ void writelines(char *lineptr[], int nlines, int reverse_flag);
 
 void p_qsort(void *lineptr[], int left, int right, int (*comp)(void *, void *));
 int numcmp(char *, char *);
+int charcmp(char *, char *);
 
 /* sort input lines */
 int main(int argc, char *argv[]) {
     int nlines, c;         /* number of input lines read */
     int numeric = 0;    /* 1 if numeric sort */
     int reverse = 0;    /* 1 reverse */
-
+    int ignore = 0;     /* 1 ignore upper and lower */
     while (--argc > 0 && (*++argv)[0] == '-') {
         while (c = *++argv[0]) {
             switch (c) {
@@ -25,6 +27,9 @@ int main(int argc, char *argv[]) {
                     break;
                 case 'r':
                     reverse = 1;
+                    break;
+                case 'f':
+                    ignore = 1;
                     break;
                 default:
                     printf("sort: illegal option %c\n", c);
@@ -35,8 +40,13 @@ int main(int argc, char *argv[]) {
     }
 
     if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
-        p_qsort((void **) lineptr, 0, nlines - 1, 
-        (int (*)(void *,void *))(numeric ? numcmp : strcmp));
+        if (ignore == 1) {
+            p_qsort((void **) lineptr, 0, nlines - 1, 
+            (int (*)(void *,void *))(charcmp));
+        } else {
+            p_qsort((void **) lineptr, 0, nlines - 1, 
+            (int (*)(void *,void *))(numeric ? numcmp : strcmp));
+        }
         writelines(lineptr, nlines, reverse);
         return 0;
     } else {
@@ -120,12 +130,11 @@ void p_qsort(void *v[], int left, int right, int (*comp)(void *, void *)) {
 
 /* numcmp: compare s1 and s2 numerically */
 int numcmp(char *s1, char *s2) {
+    printf("numcmp start ...\n");
     double v1, v2;
 
     v1 = atof(s1);
-    printf("v1 = %f\n", v1);
     v2 = atof(s2);
-    printf("v2 = %f\n", v2);
     if (v1 < v2) {
         return -1;
     } else if (v1 > v2) {
@@ -158,3 +167,13 @@ char *alloc(int n) {
     }
 }
 
+/* charcmp: return < 0 if s < t, 0 if s == t, > 0 if s > t */
+int charcmp(char *s, char *t) {
+    printf("charcmp start ...\n");
+    for (; tolower(*s) == tolower(*t); s++, t++) {
+        if (*s == '\0') {
+            return 0;
+        }
+    }
+    return tolower(*s) - tolower(*t);
+}

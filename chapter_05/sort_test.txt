@@ -1,6 +1,9 @@
-cba
-bac
-acb
+c
+A
+B
+b
+a
+D
 9
 2
 5
