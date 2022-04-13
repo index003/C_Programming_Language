@@ -8,7 +8,7 @@ int main() {
    for (int i = 0; i < 139; i++) {
         v[i] = i;
    }
-   result = binsearch(137, v, 139);
+   result = binsearch(130, v, 139);
    printf("%d\n", result);
 }
 
